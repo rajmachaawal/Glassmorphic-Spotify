@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Finger+Paint&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Kalam:wght@300;400;700&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Momo+Signature&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Rubik:ital,wght@0,300..900;1,300..900&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+        <title>Spotify-Web Player</title>
+    </head>
+    <style>
+        body {
+            background: black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100vw;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #backgroundTitle {
+            color: #07da51c2;
+            text-shadow: 0 0 50px #07da51;
+            font-weight: 400;
+            transform: scale(6);
+            font-family: Plus Jakarta Sans;
+            z-index: 0;
+            position: absolute;
+        }
+
+        .top {
+            width: 80%;
+            height: 8%;
+            box-shadow: inset 0 0 30px 1px rgba(255, 255, 255, 0.274);
+            backdrop-filter: blur(20px);
+            z-index: 1;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            border: 1px solid grey;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            margin-bottom: 1%;
+        }
+
+        .top:hover {
+            backdrop-filter: blur(50px);
+            transform: translateY(-5%);
+            box-shadow: inset 0 0 70px 1px rgba(255, 255, 255, 0.247);
+        }
+
+        #top-1 {
+            height: 100%;
+            width: 33%;
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            justify-content: center;
+        }
+
+        #spotify-img {
+            width: 10%;
+            margin-left: 2%;
+            transition: all 1s ease;
+            border-radius: 50%;
+        }
+
+        #spotify-img:hover {
+            box-shadow: 0 0 20px 5px #07da51;
+            transform: rotate(360deg);
+        }
+
+        #top-2 {
+            height: 100%;
+            width: 34%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2%;
+        }
+
+        #home-btn {
+            border-radius: 50px;
+            height: 50%;
+            width: 7.5%;
+            border: 1px outset rgba(255, 255, 255, 0.274);
+            background: rgba(128, 128, 128, 0.219);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #home-btn:hover {
+            backdrop-filter: blur(50px);
+            filter: brightness(2);
+            transform: scale(1.2);
+            box-shadow: 0 0 10px outset black;
+        }
+
+        #home-img {
+            width: 70%;
+        }
+
+        #search {
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.103);
+            text-indent: 5%;
+            height: 60%;
+            width: 75%;
+            transition: all 0.5s ease;
+            border: 1px solid rgba(255, 255, 255, 0.103);
+            color: white;
+            font-family: Google Sans Flex;
+        }
+
+        #search:focus {
+            border: 1px white;
+            text-rendering: optimizeSpeed;
+            background-color: rgba(255, 255, 255, 0.24);
+        }
+
+        #search-btn {
+            border-radius: 50px;
+            height: 50%;
+            width: 7.5%;
+            border: 1px outset rgba(255, 255, 255, 0.274);
+            background: rgba(128, 128, 128, 0.219);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #search-btn:hover {
+            backdrop-filter: blur(50px);
+            filter: brightness(2);
+            transform: scale(1.2);
+            box-shadow: 0 0 10px outset black;
+        }
+
+        #search-img {
+            width: 70%;
+        }
+
+        #top-3 {
+            height: 100%;
+            width: 33%;
+            display: flex;
+            align-items: center;
+            justify-content: right;
+            gap: 5%;
+        }
+
+        #notif {
+            height: 50%;
+            width: 7.5%;
+            border-radius: 50px;
+            background: rgba(128, 128, 128, 0.219);
+            border: 1px outset rgba(255, 255, 255, 0.274);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        #notif:hover {
+            backdrop-filter: blur(50px);
+            filter: brightness(2);
+            transform: scale(1.2);
+            box-shadow: 0 0 10px outset black;
+        }
+
+        #notif-img {
+            width: 70%;
+        }
+
+        #pfp {
+            border-radius: 50px;
+            height: 50%;
+            width: 7.5%;
+            border: 1px outset rgba(255, 255, 255, 0.274);
+            background: url(./pfp.png);
+            transform: scale(1.2);
+            background-size: cover;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10%;
+        }
+
+        #pfp:hover {
+            backdrop-filter: blur(50px);
+            transform: scale(1.5);
+            box-shadow: 0 0 10px rgb(255, 255, 255);
+            border: 1px white solid;
+        }
+
+        #pfp-img {
+            width: 100%;
+            border-radius: 50px;
+        }
+
+        .main-container {
+            width: 90%;
+            height: 70%;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            margin-bottom: 1%;
+        }
+
+        #lib {
+            width: 20%;
+            height: 100%;
+            background: none;
+            box-shadow: inset 0 0 100px 1px rgba(255, 255, 255, 0.274);
+            border-radius: 10px;
+            backdrop-filter: blur(12px);
+            border: 1px solid grey;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            justify-content: first baseline;
+        }
+
+        #lib:hover {
+            transform: translateY(-1%);
+            box-shadow: inset 0 0 300px 1px rgba(255, 255, 255, 0.247);
+            backdrop-filter: blur(50px);
+            color: white;
+        }
+
+        #lib-head {
+            color: rgba(255, 255, 255, 0.774);
+            width: 50%;
+            height: 5%;
+            font-family: Google Sans;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #lib:hover > #lib-head {
+            color: white;
+        }
+
+        .separator {
+            width: 100%;
+            height: 1px;
+            background: grey;
+        }
+
+        #playing {
+            border: 1px solid grey;
+            width: 20%;
+            height: 100%;
+            background: none;
+            box-shadow: inset 0 0 100px 10px rgba(255, 255, 255, 0.274);
+            border-radius: 20px;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+        }
+
+        #playing:hover {
+            transform: translateY(-1%);
+            box-shadow: inset 0 0 300px 1px rgba(255, 255, 255, 0.247);
+            backdrop-filter: blur(50px);
+        }
+
+        #explore {
+            width: 55%;
+            height: 100%;
+            background: none;
+            box-shadow: inset 0 0 200px 5px rgba(255, 255, 255, 0.274);
+            border-radius: 20px;
+            backdrop-filter: blur(12px);
+            border: 1px solid grey;
+            transition: all 0.3s ease;
+        }
+
+        #explore:hover {
+            transform: translateY(-1%);
+            box-shadow: inset 0 0 400px 1px rgba(255, 255, 255, 0.247);
+            backdrop-filter: blur(50px);
+        }
+
+        .playbar {
+            width: 90%;
+            height: 10%;
+            border-radius: 50px;
+            box-shadow: inset 0 0 30px 1px rgba(255, 255, 255, 0.274);
+            backdrop-filter: blur(20px);
+            border: 1px solid grey;
+            z-index: 1;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .playbar:hover {
+            box-shadow: inset 0 0 70px 1px rgba(255, 255, 255, 0.247);
+            transform: translateY(-5%);
+            box-shadow: inset 0 0 100px 1px rgba(255, 255, 255, 0.247);
+            backdrop-filter: blur(50px);
+        }
+
+        #bottom-1 {
+            width: 33%;
+            height: 100%;
+        }
+
+        #bottom-2 {
+            width: 34%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #bottom-3 {
+            width: 33%;
+            height: 100%;
+        }
+
+    </style>
+    <body>
+        <h1 id="backgroundTitle">Spotify</h1>
+        <nav class="top">
+            <div id="top-1">
+                <img src="./spotify.png" alt="" id="spotify-img">
+            </div>
+            <div id="top-2">
+                <button id="home-btn">
+                    <img src="./home.png" alt="" id="home-img">
+                </button>
+                <input type="text" id="search" name="search-btn">
+                <button id="search-btn">
+                    <img src="./search.png" alt="" id="search-img">
+                </button>
+            </div>
+            <div id="top-3">
+                <button id="notif">
+                    <img src="./bell.png" alt="" id="notif-img">
+                </button>
+                <button id="pfp">
+                </button>
+            </div>
+        </nav>
+        <div class="main-container">
+            <div id="lib">
+                <h3 id="lib-head">Your Library</h3>
+                <div class="separator">
+                </div>
+            </div>
+            <div id="explore">
+            </div>
+            <div id="playing">
+            </div>
+        </div>
+        <div class="playbar">
+            <div id="bottom-1">
+            </div>
+            <div id="bottom-2">
+                <div id="play-btn">
+                </div>
+                <div id="seek">
+                    <audio src="">
+                    </audio>
+                </div>
+            </div>
+            <div id="bottom-3">
+            </div>
+        </div>
+    </body>
+</html>
